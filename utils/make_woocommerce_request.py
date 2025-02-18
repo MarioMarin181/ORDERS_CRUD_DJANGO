@@ -3,8 +3,10 @@ import json
 import os
 
 from dotenv import load_dotenv
+from django.conf import settings
 
-load_dotenv()
+dotenv_path = os.path.join(settings.BASE_DIR, ".env")
+load_dotenv(dotenv_path)
 
 API_URL = os.getenv("WOOCOMMERCE_API_ROUTE")
 CLIENT_KEY = os.getenv("WOOCOMMERCE_CLIENT_KEY")
@@ -25,30 +27,32 @@ def make_woocommerce_request(endpoint, method, data=None):
         'Content-Type': 'application/json'
     }
 
+    url = f"{API_URL}{endpoint}"
+
     if method == "GET":
         response = requests.get(
-            API_URL + endpoint,
+            url,
             auth=(CLIENT_KEY, CLIENT_SECRET),
             params=data,
             headers=headers
         )
     elif method == "POST":
         response = requests.post(
-            API_URL + endpoint,
+            url,
             auth=(CLIENT_KEY, CLIENT_SECRET),
             data=json.dumps(data),
             headers=headers
         )
     elif method == "PUT":
         response = requests.put(
-            API_URL + endpoint,
+            url,
             auth=(CLIENT_KEY, CLIENT_SECRET),
             data=json.dumps(data),
             headers=headers
         )
     elif method == "DELETE":
         response = requests.delete(
-            API_URL + endpoint,
+            url,
             auth=(CLIENT_KEY, CLIENT_SECRET),
             data=json.dumps(data),
             headers=headers
