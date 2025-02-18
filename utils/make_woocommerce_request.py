@@ -21,29 +21,37 @@ def make_woocommerce_request(endpoint, method, data=None):
     Returns:
         dict: The response from the API.
     """
+    headers = {
+        'Content-Type': 'application/json'
+    }
+
     if method == "GET":
         response = requests.get(
             API_URL + endpoint,
             auth=(CLIENT_KEY, CLIENT_SECRET),
-            params=data
+            params=data,
+            headers=headers
         )
     elif method == "POST":
         response = requests.post(
             API_URL + endpoint,
             auth=(CLIENT_KEY, CLIENT_SECRET),
-            data=json.dumps(data)
+            data=json.dumps(data),
+            headers=headers
         )
     elif method == "PUT":
         response = requests.put(
             API_URL + endpoint,
             auth=(CLIENT_KEY, CLIENT_SECRET),
-            data=json.dumps(data)
+            data=json.dumps(data),
+            headers=headers
         )
     elif method == "DELETE":
         response = requests.delete(
             API_URL + endpoint,
             auth=(CLIENT_KEY, CLIENT_SECRET),
-            data=json.dumps(data)
+            data=json.dumps(data),
+            headers=headers
         )
     else:
         raise ValueError("Invalid method provided.")
