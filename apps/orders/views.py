@@ -1,7 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from utils.make_woocommerce_request import make_woocommerce_request
+from .services.fetch_save_orders import fetch_and_save_orders
+from .services.obtain_local_orders import obtain_local_orders
 
 from .models import OrderModel
 
@@ -35,7 +36,9 @@ def get_orders_woocommerce(request):
     # The creation of the orders should include OrderModel, OrderItemModel, ClientModel and AddressModel objects.
     # The method make_woocommerce_request would be useful for making the request to the WooCommerce API.
     # Use the endpoint 'orders' to get all orders from WooCommerce.
-    return Response({})
+
+    data = fetch_and_save_orders()
+    return Response(data)
 
 @api_view(["GET"])
 def get_local_orders(request):
@@ -49,4 +52,6 @@ def get_local_orders(request):
     """
     # TODO: Create a serializer for the OrderModel and return the serialized data.
     # The serializer should include the OrderModel, OrderItemModel, ClientModel and AddressModel objects.
-    return Response({})
+
+    serialized_orders = obtain_local_orders()
+    return Response(serialized_orders)
