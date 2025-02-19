@@ -24,7 +24,7 @@ class OrderItemModel(models.Model):
 
     quantity = models.IntegerField(verbose_name="Cantidad")
     unit_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Precio Unitario")
-    order = models.ForeignKey(OrderModel, on_delete=models.CASCADE, verbose_name="Pedido")
+    order = models.ForeignKey(OrderModel, on_delete=models.CASCADE, related_name="items", verbose_name="Pedido")
     product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, verbose_name="Producto")
 
     class Meta:

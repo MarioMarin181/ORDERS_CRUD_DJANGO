@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from .services.fetch_save_orders import fetch_and_save_orders
+from .services.obtain_local_orders import obtain_local_orders
 
 from .models import OrderModel
 
@@ -51,4 +52,6 @@ def get_local_orders(request):
     """
     # TODO: Create a serializer for the OrderModel and return the serialized data.
     # The serializer should include the OrderModel, OrderItemModel, ClientModel and AddressModel objects.
-    return Response({})
+
+    serialized_orders = obtain_local_orders()
+    return Response(serialized_orders)

@@ -6,7 +6,7 @@ class ProductSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = ProductModel
-        fields = ["id_product", "name", "price", "inventory", "description", "image", "created_at", "updated_at"] 
+        fields = "__all__" 
     
     def update(self, instance, validated_data):
         for attr, value in validated_data.items():

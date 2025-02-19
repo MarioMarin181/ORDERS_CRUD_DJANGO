@@ -34,6 +34,6 @@ def fetch_and_save_orders():
 
         saved_order = save_order_from_woocommerce(order_data)
         if saved_order:
-            saved_orders.append(saved_order.id)
+            saved_orders.append(saved_order.external_id)
 
-    return {"saved_orders": saved_orders}
+    return {"id_ordenes_guardadas": saved_orders}
