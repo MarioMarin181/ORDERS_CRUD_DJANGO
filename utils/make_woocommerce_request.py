@@ -50,6 +50,13 @@ def make_woocommerce_request(endpoint, method, data=None):
             data=json.dumps(data),
             headers=headers
         )
+    elif method == "PATCH":
+        response = requests.patch(
+            url,
+            auth=(CLIENT_KEY, CLIENT_SECRET),
+            data=json.dumps(data),
+            headers=headers
+        )
     elif method == "DELETE":
         response = requests.delete(
             url,
